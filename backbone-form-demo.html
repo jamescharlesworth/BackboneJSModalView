@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Backbone.js Modal Dialog</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="demo.css" />
+    <link href="lib/backbone-forms.css" rel="stylesheet" type="text/css"/> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src="lib/underscore-min.js" type="text/javascript"></script>
+	<script src="lib/backbone-min.js" type="text/javascript"></script>
+	<script src="lib/backbone-forms.js"></script>
+<script>
+
+
+var User = Backbone.Model.extend({
+    schema: {
+        email:      { dataType: 'email'},
+        name:  { dataType: 'Text'}
+    }
+});
+
+var formView = Backbone.View.extend({
+    render: function() {
+
+        var form = new Backbone.Form({
+            model: this.model
+        }).render();
+
+        $(this.el).append(form.el);
+
+        return this;
+    }
+});
+
+$(document).ready(function(){
+	var myUser = new User();
+	myUser.set({name:'james',email:'james.charlesworth@gmail.com'});
+	var myForm = new formView({model:myUser});
+	$('body').html(myForm.render().el);
+});
+
+</script>
+
+</head>
+<body>
+
+
+</body>
+
+</html>	

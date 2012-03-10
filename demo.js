@@ -1,6 +1,9 @@
 PersonModel = Backbone.Model.extend(
 	{
-		initialize: function() {}
+		initialize: function() {},
+		schema: {
+        	name:  { dataType: 'Text'}
+    	}	
 	});
 	
 PeopleCollection = Backbone.Collection.extend(
@@ -16,8 +19,9 @@ AddPersonView = ModalView.extend(
 			"<form>" +
 				"<label for='personName'>Person's name</label>" +
 				"<input type='text' id='personName' />" +
-				"<input id='addPersonButton' type='submit' value='Add person' />" +
+					 +
 			"</form>",
+
 		initialize:
 			function()
 			{
@@ -38,7 +42,12 @@ AddPersonView = ModalView.extend(
 		render:
 			function()
 			{
-				$(this.el).html( this.template());
+				var form = new Backbone.Form({
+            		model: this.model
+        		}).render();
+		
+
+				$(this.el).html(form.el);
 				return this;
 			}
 	});
